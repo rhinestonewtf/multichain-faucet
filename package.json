@@ -1,0 +1,29 @@
+{
+  "name": "multichain-faucet",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "start": "tsx src/index.ts",
+    "build": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.13.0",
+    "@rhinestone/sdk": "^1.2.13",
+    "better-sqlite3": "^11.0.0",
+    "dotenv": "^16.5.0",
+    "hono": "^4.6.0",
+    "nanoid": "^5.0.0",
+    "viem": "^2.45.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": ["better-sqlite3"]
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.0",
+    "@types/node": "^22.15.16",
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3"
+  }
+}
