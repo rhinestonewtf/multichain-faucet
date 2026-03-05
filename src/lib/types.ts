@@ -1,5 +1,7 @@
 import type { Address } from 'viem'
 
+export type Amount = string | number
+
 export type Role = 'member' | 'admin'
 
 export interface ApiKeyRecord {
@@ -17,7 +19,7 @@ export interface AuditEntry {
   apiKeyId: string
   chainId: number
   token: string
-  amount: number
+  amount: Amount
   dollarValue: number
   recipient: Address
   status: string
@@ -28,7 +30,7 @@ export interface AuditEntry {
 export interface DripRequest {
   chainId: number
   token: string
-  amount: number
+  amount: Amount
   recipient: string
 }
 
