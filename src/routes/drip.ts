@@ -78,7 +78,21 @@ drip.post('/', async (c) => {
     if (err instanceof DripLimitExceededError) {
       return c.json({ error: err.message }, 400)
     }
+
     console.error('Drip failed:', err)
+
+    // Pass through orchestrator error details (traceId, errorType)
+    if (err instanceof Error && 'traceId' in err) {
+      const orchErr = err as Error & { traceId?: string; errorType?: string; statusCode?: number }
+      return c.json({
+        error: orchErr.message,
+        errorType: orchErr.errorType,
+        traceId: orchErr.traceId,
+      }, orchErr.statusCode && orchErr.statusCode >= 400 && orchErr.statusCode < 600
+        ? orchErr.statusCode as any
+        : 500)
+    }
+
     return c.json({ error: 'Failed to process drip request' }, 500)
   }
 })
