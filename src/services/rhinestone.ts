@@ -64,7 +64,7 @@ export async function getWalletAddress(): Promise<Address> {
 export interface DripParams {
   chainId: number;
   token: string;
-  amount: number;
+  amount: string;
   recipient: Address;
 }
 

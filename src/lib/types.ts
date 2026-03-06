@@ -17,7 +17,7 @@ export interface AuditEntry {
   apiKeyId: string
   chainId: number
   token: string
-  amount: number
+  amount: string
   dollarValue: number
   recipient: Address
   status: string
@@ -28,7 +28,7 @@ export interface AuditEntry {
 export interface DripRequest {
   chainId: number
   token: string
-  amount: number
+  amount: string
   recipient: string
 }
 
