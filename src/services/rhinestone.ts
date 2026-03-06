@@ -16,7 +16,6 @@ import {
 import * as viemChains from "viem/chains";
 import { privateKeyToAccount } from "viem/accounts";
 import { env } from "../env.js";
-import type { Amount } from "../lib/types.js";
 
 interface FillResult {
   fill: { hash: Hex | undefined; chainId: number };
@@ -65,7 +64,7 @@ export async function getWalletAddress(): Promise<Address> {
 export interface DripParams {
   chainId: number;
   token: string;
-  amount: Amount;
+  amount: string;
   recipient: Address;
 }
 

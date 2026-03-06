@@ -46,7 +46,7 @@ Send tokens to a recipient.
 {
   "chainId": 8453,
   "token": "USDC",        // symbol or contract address
-  "amount": 1000000,      // raw amount (with decimals)
+  "amount": "1000000",    // raw amount as string (with decimals)
   "recipient": "0x..."
 }
 

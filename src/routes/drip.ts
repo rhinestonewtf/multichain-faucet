@@ -29,13 +29,10 @@ drip.post('/', async (c) => {
     )
   }
 
-  // Validate amount (number or string, already formatted with decimals)
-  if (
-    body.amount === undefined ||
-    (typeof body.amount !== 'number' && typeof body.amount !== 'string')
-  ) {
+  // Validate amount (string, already formatted with decimals)
+  if (!body.amount || typeof body.amount !== 'string') {
     return c.json(
-      { error: 'amount is required (number or string with decimals, e.g. 1000000 for 1 USDC)' },
+      { error: 'amount is required (string with decimals, e.g. "1000000" for 1 USDC)' },
       400,
     )
   }
