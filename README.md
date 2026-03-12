@@ -1,6 +1,6 @@
 # Multichain Faucet
 
-Distributes test tokens across EVM chains via the Rhinestone SDK.
+Distributes tokens across EVM chains via intents.
 
 ## Setup
 
