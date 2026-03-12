@@ -6,7 +6,8 @@ import { logger } from 'hono/logger'
 import drip from './routes/drip.js'
 import admin from './routes/admin.js'
 import { seedInitialAdminKey } from './lib/db.js'
-import { getWalletAddress } from './services/rhinestone.js'
+import { getWalletAddress, getSupportedChains } from './services/rhinestone.js'
+import { apiKeyAuth, type AuthEnv } from './middleware/auth.js'
 
 // Seed initial admin key if configured
 seedInitialAdminKey()
@@ -24,6 +25,11 @@ app.get('/health', (c) => c.json({ ok: true }))
 app.get('/wallet', async (c) => {
   const address = await getWalletAddress()
   return c.json({ address })
+})
+
+app.get('/chains', apiKeyAuth, async (c) => {
+  const chains = await getSupportedChains()
+  return c.json(chains)
 })
 
 const port = parseInt(process.env.PORT || '3000')
