@@ -85,6 +85,6 @@ Query params: `name` (filter by key name), `limit` (default 50).
 
 Returns audit log entries with chain, token, amount, dollar value, recipient, tx hash, and timestamp.
 
-### `GET /api/admin/wallet`
+### `GET /api/wallet`
 
-Returns the faucet wallet address.
+Returns the faucet wallet address. No authentication required.
