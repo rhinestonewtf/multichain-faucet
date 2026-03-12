@@ -5,6 +5,7 @@ import { cors } from 'hono/cors'
 import { logger } from 'hono/logger'
 import drip from './routes/drip.js'
 import admin from './routes/admin.js'
+import wallet from './routes/wallet.js'
 import { seedInitialAdminKey } from './lib/db.js'
 import { getWalletAddress, getSupportedChains } from './services/rhinestone.js'
 import { apiKeyAuth, type AuthEnv } from './middleware/auth.js'
@@ -18,6 +19,7 @@ app.use('*', logger())
 app.use('*', cors())
 
 app.route('/drip', drip)
+app.route('/wallet', wallet)
 app.route('/admin', admin)
 
 app.get('/health', (c) => c.json({ ok: true }))

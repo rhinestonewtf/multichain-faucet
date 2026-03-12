@@ -85,6 +85,33 @@ Query params: `name` (filter by key name), `limit` (default 50).
 
 Returns audit log entries with chain, token, amount, dollar value, recipient, tx hash, and timestamp.
 
+### `GET /api/chains`
+
+Returns the list of supported chains from the Rhinestone orchestrator. Response is cached for 5 minutes.
+
 ### `GET /api/wallet`
 
-Returns the faucet wallet address. No authentication required.
+Returns the faucet wallet address.
+
+### `GET /api/wallet/balance`
+
+Returns the faucet wallet's multichain token balances (unlocked only).
+
+Query params: `testnets` (`true` or `false`, default `true`).
+
+```json
+{
+  "address": "0x...",
+  "tokens": [
+    {
+      "symbol": "USDC",
+      "decimals": 6,
+      "balance": "10000000",
+      "chains": [
+        { "chainId": 10, "tokenAddress": "0x...", "balance": "5000000" },
+        { "chainId": 8453, "tokenAddress": "0x...", "balance": "5000000" }
+      ]
+    }
+  ]
+}
+```

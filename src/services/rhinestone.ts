@@ -3,6 +3,7 @@ import {
   getTokenAddress,
   getTokenDecimals,
   type TokenSymbol,
+  type Portfolio,
 } from "@rhinestone/sdk";
 import {
   type Address,
@@ -85,6 +86,11 @@ export async function getSupportedChains(): Promise<unknown> {
 export async function getWalletAddress(): Promise<Address> {
   const account = await getAccount();
   return account.getAddress();
+}
+
+export async function getBalance(onTestnets = true): Promise<Portfolio> {
+  const account = await getAccount();
+  return account.getPortfolio(onTestnets);
 }
 
 export interface DripParams {
