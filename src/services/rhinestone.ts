@@ -56,6 +56,32 @@ function resolveToAddress(token: string, chainId: number): Address {
   return getTokenAddress(token as TokenSymbol, chainId);
 }
 
+const ORCHESTRATOR_CHAINS_URL =
+  "https://v1.orchestrator.rhinestone.dev/chains";
+const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes
+
+let chainsCache: { data: unknown; expiresAt: number } | null = null;
+
+export async function getSupportedChains(): Promise<unknown> {
+  if (chainsCache && Date.now() < chainsCache.expiresAt) {
+    return chainsCache.data;
+  }
+
+  const res = await fetch(ORCHESTRATOR_CHAINS_URL, {
+    headers: { "x-api-key": env.ORCHESTRATOR_API_KEY },
+  });
+
+  if (!res.ok) {
+    throw new Error(
+      `Orchestrator /chains returned ${res.status}: ${await res.text()}`,
+    );
+  }
+
+  const data = await res.json();
+  chainsCache = { data, expiresAt: Date.now() + CACHE_TTL_MS };
+  return data;
+}
+
 export async function getWalletAddress(): Promise<Address> {
   const account = await getAccount();
   return account.getAddress();
