@@ -6,7 +6,6 @@ import {
   listApiKeys,
   getAuditLog,
 } from '../lib/db.js'
-import { getWalletAddress } from '../services/rhinestone.js'
 import type { Role } from '../lib/types.js'
 
 const admin = new Hono<AuthEnv>()
@@ -48,12 +47,6 @@ admin.get('/audit', async (c) => {
   const limit = limitStr ? parseInt(limitStr) : 50
   const entries = getAuditLog({ name: name || undefined, limit })
   return c.json(entries)
-})
-
-// Wallet address
-admin.get('/wallet', async (c) => {
-  const address = await getWalletAddress()
-  return c.json({ address })
 })
 
 export default admin
