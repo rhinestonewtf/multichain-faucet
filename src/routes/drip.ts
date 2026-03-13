@@ -49,6 +49,14 @@ drip.post('/', async (c) => {
     return c.json({ error: 'Invalid recipient address' }, 400)
   }
 
+  // Validate reason
+  if (!body.reason || typeof body.reason !== 'string' || body.reason.trim().length === 0) {
+    return c.json({ error: 'reason is required (string describing why this drip is needed)' }, 400)
+  }
+  if (body.reason.length > 280) {
+    return c.json({ error: 'reason must be 280 characters or fewer' }, 400)
+  }
+
   try {
     const result = await executeDrip({
       chainId: body.chainId,
@@ -69,6 +77,7 @@ drip.post('/', async (c) => {
       recipient: body.recipient as Address,
       status: result.status,
       txHash: result.txHash,
+      reason: body.reason.trim(),
       timestamp: new Date().toISOString(),
     }
     addAuditEntry(auditEntry)

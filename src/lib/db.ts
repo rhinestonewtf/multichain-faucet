@@ -40,6 +40,13 @@ db.exec(`
   CREATE INDEX IF NOT EXISTS idx_audit_log_timestamp ON audit_log(timestamp DESC);
 `)
 
+// Migration: add reason column to existing databases
+try {
+  db.exec(`ALTER TABLE audit_log ADD COLUMN reason TEXT NOT NULL DEFAULT ''`)
+} catch {
+  // Column already exists
+}
+
 // --- Initial Admin Key ---
 
 export function seedInitialAdminKey(): void {
@@ -110,8 +117,8 @@ export function listApiKeys(): ApiKeyRecord[] {
 
 export function addAuditEntry(entry: AuditEntry): void {
   db.prepare(
-    `INSERT INTO audit_log (id, name, api_key_id, chain_id, token, amount, dollar_value, recipient, status, tx_hash, timestamp)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    `INSERT INTO audit_log (id, name, api_key_id, chain_id, token, amount, dollar_value, recipient, status, tx_hash, reason, timestamp)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
   ).run(
     entry.id,
     entry.name,
@@ -123,6 +130,7 @@ export function addAuditEntry(entry: AuditEntry): void {
     entry.recipient,
     entry.status,
     entry.txHash,
+    entry.reason,
     entry.timestamp,
   )
 }
@@ -137,7 +145,7 @@ export function getAuditLog(filters?: {
     return db
       .prepare(
         `SELECT id, name, api_key_id as apiKeyId, chain_id as chainId, token, amount,
-                dollar_value as dollarValue, recipient, status, tx_hash as txHash, timestamp
+                dollar_value as dollarValue, recipient, status, tx_hash as txHash, reason, timestamp
          FROM audit_log WHERE name = ? ORDER BY timestamp DESC LIMIT ?`,
       )
       .all(filters.name, limit) as AuditEntry[]
@@ -146,7 +154,7 @@ export function getAuditLog(filters?: {
   return db
     .prepare(
       `SELECT id, name, api_key_id as apiKeyId, chain_id as chainId, token, amount,
-              dollar_value as dollarValue, recipient, status, tx_hash as txHash, timestamp
+              dollar_value as dollarValue, recipient, status, tx_hash as txHash, reason, timestamp
        FROM audit_log ORDER BY timestamp DESC LIMIT ?`,
     )
     .all(limit) as AuditEntry[]

@@ -22,6 +22,7 @@ export interface AuditEntry {
   recipient: Address
   status: string
   txHash: string
+  reason: string
   timestamp: string
 }
 
@@ -30,6 +31,7 @@ export interface DripRequest {
   token: string
   amount: string
   recipient: string
+  reason: string
 }
 
 export interface DripResponse {
