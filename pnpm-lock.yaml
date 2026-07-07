@@ -12,8 +12,8 @@ importers:
         specifier: ^1.13.0
         version: 1.19.9(hono@4.12.3)
       '@rhinestone/sdk':
-        specifier: ^1.2.13
-        version: 1.2.14(typescript@5.9.3)(viem@2.46.3(typescript@5.9.3))
+        specifier: ^1.9.2
+        version: 1.9.2(typescript@5.9.3)(viem@2.46.3(typescript@5.9.3))
       better-sqlite3:
         specifier: ^11.0.0
         version: 11.10.0
@@ -222,13 +222,20 @@ packages:
     resolution: {integrity: sha512-jCs9ldd7NwzpgXDIf6P3+NrHh9/sD6CQdxHyjQI+h/6rDNo88ypBxxz45UDuZHz9r3tNz7N/VInSVoVdtXEI4A==}
     engines: {node: ^14.21.3 || >=16}
 
-  '@rhinestone/sdk@1.2.14':
-    resolution: {integrity: sha512-sEuiwc2MDKKylaJysuG7fzFe9k48HQt2wHfqf0P30A9JNDjrgQ6InFFzb+12ZJPFIISTg5R8ejG7dEjpVhnOug==}
+  '@rhinestone/sdk@1.9.2':
+    resolution: {integrity: sha512-Y5jV6o24i+PhvWO6t7xWrKZ4sA+Kpbb3fVGsGVAxiW06ztV820Ad1keumARegsHe2WhXDQpuNZA4cEKEoS0jRg==}
     peerDependencies:
+      express: '>=4'
+      jose: '>=5.0.0'
       viem: ^2.38.0
+    peerDependenciesMeta:
+      express:
+        optional: true
+      jose:
+        optional: true
 
-  '@rhinestone/shared-configs@1.4.97':
-    resolution: {integrity: sha512-+3OigqALe7cix8qf6OpopqxS15XddYhC3q+i5Z91ccA6D4RBjx9SxCrXuLH6zdMlj3pojNKj5zyCs5wTXkPIMw==}
+  '@rhinestone/shared-configs@1.6.10':
+    resolution: {integrity: sha512-rUSmn78bzXohGhwohuS39qCiDZlMgVrBpvoDb7ZRNi/fJ0Nb62EwtbdktCyB5ACl2vRaR2Or04TO7y+3tHBO0A==}
     peerDependencies:
       typescript: ^5
       viem: ^2.40.1
@@ -367,14 +374,6 @@ packages:
 
   once@1.4.0:
     resolution: {integrity: sha512-lNaJgI+2Q5URQBkccEKHTQOPaXdUxnZZElQTZY0MFUAuaEqe1E+Nyvgdz/aIyNi6Z9MzO5dv1H8n58/GELp3+w==}
-
-  ox@0.11.3:
-    resolution: {integrity: sha512-1bWYGk/xZel3xro3l8WGg6eq4YEKlaqvyMtVhfMFpbJzK2F6rj4EDRtqDCWVEJMkzcmEi9uW2QxsqELokOlarw==}
-    peerDependencies:
-      typescript: '>=5.4.0'
-    peerDependenciesMeta:
-      typescript:
-        optional: true
 
   ox@0.12.4:
     resolution: {integrity: sha512-+P+C7QzuwPV8lu79dOwjBKfB2CbnbEXe/hfyyrff1drrO1nOOj3Hc87svHfcW1yneRr3WXaKr6nz11nq+/DF9Q==}
@@ -571,17 +570,15 @@ snapshots:
 
   '@noble/hashes@1.8.0': {}
 
-  '@rhinestone/sdk@1.2.14(typescript@5.9.3)(viem@2.46.3(typescript@5.9.3))':
+  '@rhinestone/sdk@1.9.2(typescript@5.9.3)(viem@2.46.3(typescript@5.9.3))':
     dependencies:
-      '@rhinestone/shared-configs': 1.4.97(typescript@5.9.3)(viem@2.46.3(typescript@5.9.3))
-      ox: 0.11.3(typescript@5.9.3)
+      '@rhinestone/shared-configs': 1.6.10(typescript@5.9.3)(viem@2.46.3(typescript@5.9.3))
       solady: 0.1.26
       viem: 2.46.3(typescript@5.9.3)
     transitivePeerDependencies:
       - typescript
-      - zod
 
-  '@rhinestone/shared-configs@1.4.97(typescript@5.9.3)(viem@2.46.3(typescript@5.9.3))':
+  '@rhinestone/shared-configs@1.6.10(typescript@5.9.3)(viem@2.46.3(typescript@5.9.3))':
     dependencies:
       typescript: 5.9.3
       viem: 2.46.3(typescript@5.9.3)
@@ -724,21 +721,6 @@ snapshots:
   once@1.4.0:
     dependencies:
       wrappy: 1.0.2
-
-  ox@0.11.3(typescript@5.9.3):
-    dependencies:
-      '@adraffy/ens-normalize': 1.11.1
-      '@noble/ciphers': 1.3.0
-      '@noble/curves': 1.9.1
-      '@noble/hashes': 1.8.0
-      '@scure/bip32': 1.7.0
-      '@scure/bip39': 1.6.0
-      abitype: 1.2.3(typescript@5.9.3)
-      eventemitter3: 5.0.1
-    optionalDependencies:
-      typescript: 5.9.3
-    transitivePeerDependencies:
-      - zod
 
   ox@0.12.4(typescript@5.9.3):
     dependencies:
